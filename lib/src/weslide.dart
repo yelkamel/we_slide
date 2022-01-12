@@ -138,6 +138,10 @@ class WeSlide extends StatefulWidget {
   /// to enable Gaussian blur effect. By default is false
   final bool hideAppBar;
 
+  /// This is the value that defines if you want
+  /// to extend the body behind the appbar, tabbar and foorter. By default is false
+  final bool extendsBodyBehind;
+
   /// The [isDismissible] parameter specifies whether the panel
   /// will be dismissed when user taps on the screen.
   final bool isDismissible;
@@ -187,6 +191,7 @@ class WeSlide extends StatefulWidget {
     this.blur = false,
     this.hideAppBar = true,
     this.isDismissible = true,
+    this.extendsBodyBehind = false,
     List<TweenSequenceItem<double>>? fadeSequence,
     this.animateDuration = const Duration(milliseconds: 300),
     this.controller,
@@ -423,7 +428,9 @@ class _WeSlideState extends State<WeSlide> with SingleTickerProviderStateMixin {
               );
             },
             child: Container(
-              height: _height - _getBodyHeight(),
+              height: widget.extendsBodyBehind
+                  ? _height
+                  : _height - _getBodyHeight(),
               width: widget.bodyWidth ?? _width,
               child: widget.body,
             ),
